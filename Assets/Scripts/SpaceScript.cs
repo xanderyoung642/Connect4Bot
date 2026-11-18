@@ -1,4 +1,5 @@
 using System.Numerics;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SpaceScript : MonoBehaviour
@@ -19,13 +20,20 @@ public class SpaceScript : MonoBehaviour
     public GameObject chipFilling;
 
     [Header("Space Above For Collider Stuff")]
+    public bool topRow;
     public GameObject spaceAboveMe;
+
+    [Header("Win Logic")]
+    public GameObject winLogicObject;
+    public WinLogic winLogicScript;
 
     void Start()
     {
         state = "e";
 
         filled = false;
+
+        winLogicScript = winLogicObject.GetComponent<WinLogic>();
     }
 
     void OnCollisionEnter2D(Collision2D collider)
@@ -42,5 +50,10 @@ public class SpaceScript : MonoBehaviour
 
 
         other.GetComponent<ChipScript>().NowOccupyingSomething(gameObject);
+    }
+
+    public void ChipUpdated()
+    {
+        winLogicScript.UpdateChip(row, column, state, inLRDiag, lRDiagIndex, inRLDiag, rLDiagIndex);
     }
 }

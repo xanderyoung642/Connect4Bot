@@ -12,13 +12,14 @@ public class ChipScript : MonoBehaviour
 
     public void NowOccupyingSomething(GameObject space)
     {
-	    spaceFilling = space;
-	
-	    spaceScript = spaceFilling.GetComponent<SpaceScript>();
+        spaceFilling = space;
+
+        spaceScript = spaceFilling.GetComponent<SpaceScript>();
 
         spaceScript.state = color;
         spaceScript.filled = true;
         spaceScript.chipFilling = gameObject;
-    }
 
+        spaceScript.ChipUpdated();
+    }
 }
