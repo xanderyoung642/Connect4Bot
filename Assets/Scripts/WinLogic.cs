@@ -1,6 +1,8 @@
 using System;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class WinLogic : MonoBehaviour
 {
@@ -126,6 +128,9 @@ public class WinLogic : MonoBehaviour
 
     public void UpdateChip(int chipRow, int chipColumn, string fill, bool Lrd, int LrdI, bool Rld, int RldI)
     {
+        rowsArray[chipRow].cells[chipColumn].fillValue = fill;
+        columnsArray[chipColumn].cells[chipRow].fillValue = fill;
+
         int LrdCIndex = 0;
         int RldCIndex = 0;
         if (Lrd)
@@ -161,7 +166,73 @@ public class WinLogic : MonoBehaviour
 
     void HorizontalWinLogic(int row, string fill)
     {
+        HorizontalCell[] colorInhabitingArray = GetMatchingCellsInRow(row, fill);
+        
+        //want to not make this for loop, this is just quick fix
+        int[] columnNumbersArray = new int[colorInhabitingArray.Length];
 
+        for (int i = 0; i < colorInhabitingArray.Length; i++)
+        {
+            columnNumbersArray[i] = colorInhabitingArray[i].columnNumber;
+        }
+        
+        if (!(colorInhabitingArray.Length < 4))
+        {
+            if (columnNumbersArray.Contains(3))
+            {
+                int threeIndex = Array.IndexOf(columnNumbersArray, 3);
+                bool leftSide;
+                bool rightSide;
+
+                if (threeIndex != 0)
+                {
+                    leftSide = (columnNumbersArray[threeIndex - 1] == 2);
+                }
+                else
+                {
+                    leftSide = false;
+                }
+
+                if (threeIndex != 6 && !((threeIndex + 1) >= columnNumbersArray.Length))
+                {
+                    rightSide = (columnNumbersArray[threeIndex + 1] == 4);
+                }
+                else
+                {
+                    rightSide = false;
+                }
+
+                if (leftSide && rightSide)
+                {
+                    if (columnNumbersArray.Contains(1) || columnNumbersArray.Contains(5))
+                    {
+                        Debug.Log("Horiz Win");
+                    }
+                }
+                else if (leftSide)
+                {
+                    if (columnNumbersArray.Contains(0))
+                    {
+                        int zeroIndex = Array.IndexOf(columnNumbersArray, 0);
+                        if ((threeIndex - zeroIndex) == 3)
+                        {
+                            Debug.Log("Horiz Win");
+                        }
+                    }
+                }
+                else if (rightSide)
+                {
+                    if (columnNumbersArray.Contains(6))
+                    {
+                        int sixIndex = Array.IndexOf(columnNumbersArray, 6);
+                        if ((sixIndex - threeIndex) == 3)
+                        {
+                            Debug.Log("Horiz Win");
+                        }
+                    }
+                }
+            }
+        }
     }
 
     public HorizontalCell[] GetMatchingCellsInRow(int rowIndex, string targetChipValue)
@@ -176,7 +247,11 @@ public class WinLogic : MonoBehaviour
 
     void VerticalWinLogic(int column, string fill)
     {
-
+        VerticalCell[] colorInhabitingArray = GetMatchingCellsInColumn(column, fill);
+        if (colorInhabitingArray.Length == 2 && (colorInhabitingArray[1].rowNumber - colorInhabitingArray[0].rowNumber) == 1)
+        {
+            Debug.Log("Win");
+        }
     }
 
     public VerticalCell[] GetMatchingCellsInColumn(int columnIndex, string targetChipValue)

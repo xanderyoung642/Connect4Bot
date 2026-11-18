@@ -5290,6 +5290,454 @@ MonoBehaviour:
   redTurn: 0
   numberOfMoves: 0
   win: 0
+  rowsArray:
+  - name: Row0
+    cells:
+    - cellCoords: 00
+      spaceObject: {fileID: 1353305345}
+      rowNumber: 0
+      columnNumber: 0
+      fillValue: e
+    - cellCoords: 01
+      spaceObject: {fileID: 1703352084}
+      rowNumber: 0
+      columnNumber: 1
+      fillValue: e
+    - cellCoords: 02
+      spaceObject: {fileID: 1452805358}
+      rowNumber: 0
+      columnNumber: 2
+      fillValue: e
+    - cellCoords: 03
+      spaceObject: {fileID: 2047898541}
+      rowNumber: 0
+      columnNumber: 3
+      fillValue: e
+    - cellCoords: 04
+      spaceObject: {fileID: 211552728}
+      rowNumber: 0
+      columnNumber: 4
+      fillValue: e
+    - cellCoords: 05
+      spaceObject: {fileID: 584304480}
+      rowNumber: 0
+      columnNumber: 5
+      fillValue: e
+    - cellCoords: 06
+      spaceObject: {fileID: 1130826932}
+      rowNumber: 0
+      columnNumber: 6
+      fillValue: e
+  - name: Row1
+    cells:
+    - cellCoords: 10
+      spaceObject: {fileID: 880840416}
+      rowNumber: 1
+      columnNumber: 0
+      fillValue: e
+    - cellCoords: 11
+      spaceObject: {fileID: 766538730}
+      rowNumber: 1
+      columnNumber: 1
+      fillValue: e
+    - cellCoords: 12
+      spaceObject: {fileID: 1011623757}
+      rowNumber: 1
+      columnNumber: 2
+      fillValue: e
+    - cellCoords: 13
+      spaceObject: {fileID: 801087396}
+      rowNumber: 1
+      columnNumber: 3
+      fillValue: e
+    - cellCoords: 14
+      spaceObject: {fileID: 2120390241}
+      rowNumber: 1
+      columnNumber: 4
+      fillValue: e
+    - cellCoords: 15
+      spaceObject: {fileID: 1207507768}
+      rowNumber: 1
+      columnNumber: 5
+      fillValue: e
+    - cellCoords: 16
+      spaceObject: {fileID: 1261534448}
+      rowNumber: 1
+      columnNumber: 6
+      fillValue: e
+  - name: Row2
+    cells:
+    - cellCoords: 20
+      spaceObject: {fileID: 1089581839}
+      rowNumber: 2
+      columnNumber: 0
+      fillValue: e
+    - cellCoords: 21
+      spaceObject: {fileID: 913149120}
+      rowNumber: 2
+      columnNumber: 1
+      fillValue: e
+    - cellCoords: 22
+      spaceObject: {fileID: 1368488065}
+      rowNumber: 2
+      columnNumber: 2
+      fillValue: e
+    - cellCoords: 23
+      spaceObject: {fileID: 192339873}
+      rowNumber: 2
+      columnNumber: 3
+      fillValue: e
+    - cellCoords: 24
+      spaceObject: {fileID: 1348424553}
+      rowNumber: 2
+      columnNumber: 4
+      fillValue: e
+    - cellCoords: 25
+      spaceObject: {fileID: 1872968791}
+      rowNumber: 2
+      columnNumber: 5
+      fillValue: e
+    - cellCoords: 26
+      spaceObject: {fileID: 45153628}
+      rowNumber: 2
+      columnNumber: 6
+      fillValue: e
+  - name: Row3
+    cells:
+    - cellCoords: 30
+      spaceObject: {fileID: 496183326}
+      rowNumber: 3
+      columnNumber: 0
+      fillValue: e
+    - cellCoords: 31
+      spaceObject: {fileID: 210766606}
+      rowNumber: 3
+      columnNumber: 1
+      fillValue: e
+    - cellCoords: 32
+      spaceObject: {fileID: 1323349692}
+      rowNumber: 3
+      columnNumber: 2
+      fillValue: e
+    - cellCoords: 33
+      spaceObject: {fileID: 125856674}
+      rowNumber: 3
+      columnNumber: 3
+      fillValue: e
+    - cellCoords: 34
+      spaceObject: {fileID: 859450724}
+      rowNumber: 3
+      columnNumber: 4
+      fillValue: e
+    - cellCoords: 35
+      spaceObject: {fileID: 1367648878}
+      rowNumber: 3
+      columnNumber: 5
+      fillValue: e
+    - cellCoords: 36
+      spaceObject: {fileID: 333750660}
+      rowNumber: 3
+      columnNumber: 6
+      fillValue: e
+  - name: Row4
+    cells:
+    - cellCoords: 40
+      spaceObject: {fileID: 856826549}
+      rowNumber: 4
+      columnNumber: 0
+      fillValue: e
+    - cellCoords: 41
+      spaceObject: {fileID: 621653590}
+      rowNumber: 4
+      columnNumber: 1
+      fillValue: e
+    - cellCoords: 42
+      spaceObject: {fileID: 347066936}
+      rowNumber: 4
+      columnNumber: 2
+      fillValue: e
+    - cellCoords: 43
+      spaceObject: {fileID: 1579248509}
+      rowNumber: 4
+      columnNumber: 3
+      fillValue: e
+    - cellCoords: 44
+      spaceObject: {fileID: 749458665}
+      rowNumber: 4
+      columnNumber: 4
+      fillValue: e
+    - cellCoords: 45
+      spaceObject: {fileID: 1913846716}
+      rowNumber: 4
+      columnNumber: 5
+      fillValue: e
+    - cellCoords: 46
+      spaceObject: {fileID: 1017552661}
+      rowNumber: 4
+      columnNumber: 6
+      fillValue: e
+  - name: Row5
+    cells:
+    - cellCoords: 50
+      spaceObject: {fileID: 1766041809}
+      rowNumber: 5
+      columnNumber: 0
+      fillValue: e
+    - cellCoords: 51
+      spaceObject: {fileID: 1547239384}
+      rowNumber: 5
+      columnNumber: 1
+      fillValue: e
+    - cellCoords: 52
+      spaceObject: {fileID: 743980315}
+      rowNumber: 5
+      columnNumber: 2
+      fillValue: e
+    - cellCoords: 53
+      spaceObject: {fileID: 1557075015}
+      rowNumber: 5
+      columnNumber: 3
+      fillValue: e
+    - cellCoords: 54
+      spaceObject: {fileID: 120923359}
+      rowNumber: 5
+      columnNumber: 4
+      fillValue: e
+    - cellCoords: 55
+      spaceObject: {fileID: 175390915}
+      rowNumber: 5
+      columnNumber: 5
+      fillValue: e
+    - cellCoords: 56
+      spaceObject: {fileID: 1136742707}
+      rowNumber: 5
+      columnNumber: 6
+      fillValue: e
+  columnsArray:
+  - name: Column0
+    cells:
+    - cellCoords: 00
+      spaceObject: {fileID: 1353305345}
+      rowNumber: 0
+      columnNumber: 0
+      fillValue: e
+    - cellCoords: 10
+      spaceObject: {fileID: 880840416}
+      rowNumber: 1
+      columnNumber: 0
+      fillValue: e
+    - cellCoords: 20
+      spaceObject: {fileID: 1089581839}
+      rowNumber: 2
+      columnNumber: 0
+      fillValue: e
+    - cellCoords: 30
+      spaceObject: {fileID: 496183326}
+      rowNumber: 3
+      columnNumber: 0
+      fillValue: e
+    - cellCoords: 40
+      spaceObject: {fileID: 856826549}
+      rowNumber: 4
+      columnNumber: 0
+      fillValue: e
+    - cellCoords: 50
+      spaceObject: {fileID: 1766041809}
+      rowNumber: 5
+      columnNumber: 0
+      fillValue: e
+  - name: Column1
+    cells:
+    - cellCoords: 01
+      spaceObject: {fileID: 1703352084}
+      rowNumber: 0
+      columnNumber: 1
+      fillValue: e
+    - cellCoords: 11
+      spaceObject: {fileID: 766538730}
+      rowNumber: 1
+      columnNumber: 1
+      fillValue: e
+    - cellCoords: 21
+      spaceObject: {fileID: 913149120}
+      rowNumber: 2
+      columnNumber: 1
+      fillValue: e
+    - cellCoords: 31
+      spaceObject: {fileID: 210766606}
+      rowNumber: 3
+      columnNumber: 1
+      fillValue: e
+    - cellCoords: 41
+      spaceObject: {fileID: 621653590}
+      rowNumber: 4
+      columnNumber: 1
+      fillValue: e
+    - cellCoords: 51
+      spaceObject: {fileID: 1547239384}
+      rowNumber: 5
+      columnNumber: 1
+      fillValue: e
+  - name: Column2
+    cells:
+    - cellCoords: 02
+      spaceObject: {fileID: 1452805358}
+      rowNumber: 0
+      columnNumber: 2
+      fillValue: e
+    - cellCoords: 12
+      spaceObject: {fileID: 1011623757}
+      rowNumber: 1
+      columnNumber: 2
+      fillValue: e
+    - cellCoords: 22
+      spaceObject: {fileID: 1368488065}
+      rowNumber: 2
+      columnNumber: 2
+      fillValue: e
+    - cellCoords: 32
+      spaceObject: {fileID: 1323349692}
+      rowNumber: 3
+      columnNumber: 2
+      fillValue: e
+    - cellCoords: 42
+      spaceObject: {fileID: 347066936}
+      rowNumber: 4
+      columnNumber: 2
+      fillValue: e
+    - cellCoords: 52
+      spaceObject: {fileID: 743980315}
+      rowNumber: 5
+      columnNumber: 2
+      fillValue: e
+  - name: Column3
+    cells:
+    - cellCoords: 03
+      spaceObject: {fileID: 2047898541}
+      rowNumber: 0
+      columnNumber: 3
+      fillValue: e
+    - cellCoords: 13
+      spaceObject: {fileID: 801087396}
+      rowNumber: 1
+      columnNumber: 3
+      fillValue: e
+    - cellCoords: 23
+      spaceObject: {fileID: 192339873}
+      rowNumber: 2
+      columnNumber: 3
+      fillValue: e
+    - cellCoords: 33
+      spaceObject: {fileID: 125856674}
+      rowNumber: 3
+      columnNumber: 3
+      fillValue: e
+    - cellCoords: 43
+      spaceObject: {fileID: 1579248509}
+      rowNumber: 4
+      columnNumber: 3
+      fillValue: e
+    - cellCoords: 53
+      spaceObject: {fileID: 1557075015}
+      rowNumber: 5
+      columnNumber: 3
+      fillValue: e
+  - name: Column4
+    cells:
+    - cellCoords: 04
+      spaceObject: {fileID: 211552728}
+      rowNumber: 0
+      columnNumber: 4
+      fillValue: e
+    - cellCoords: 14
+      spaceObject: {fileID: 2120390241}
+      rowNumber: 1
+      columnNumber: 4
+      fillValue: e
+    - cellCoords: 24
+      spaceObject: {fileID: 1348424553}
+      rowNumber: 2
+      columnNumber: 4
+      fillValue: e
+    - cellCoords: 34
+      spaceObject: {fileID: 859450724}
+      rowNumber: 3
+      columnNumber: 4
+      fillValue: e
+    - cellCoords: 44
+      spaceObject: {fileID: 749458665}
+      rowNumber: 4
+      columnNumber: 4
+      fillValue: e
+    - cellCoords: 54
+      spaceObject: {fileID: 120923359}
+      rowNumber: 5
+      columnNumber: 4
+      fillValue: e
+  - name: Column5
+    cells:
+    - cellCoords: 05
+      spaceObject: {fileID: 584304480}
+      rowNumber: 0
+      columnNumber: 5
+      fillValue: e
+    - cellCoords: 15
+      spaceObject: {fileID: 1207507768}
+      rowNumber: 1
+      columnNumber: 5
+      fillValue: e
+    - cellCoords: 25
+      spaceObject: {fileID: 1872968791}
+      rowNumber: 2
+      columnNumber: 5
+      fillValue: e
+    - cellCoords: 35
+      spaceObject: {fileID: 1367648878}
+      rowNumber: 3
+      columnNumber: 5
+      fillValue: e
+    - cellCoords: 45
+      spaceObject: {fileID: 1913846716}
+      rowNumber: 4
+      columnNumber: 5
+      fillValue: e
+    - cellCoords: 55
+      spaceObject: {fileID: 175390915}
+      rowNumber: 5
+      columnNumber: 5
+      fillValue: e
+  - name: Column6
+    cells:
+    - cellCoords: 06
+      spaceObject: {fileID: 1130826932}
+      rowNumber: 0
+      columnNumber: 6
+      fillValue: e
+    - cellCoords: 16
+      spaceObject: {fileID: 1261534448}
+      rowNumber: 1
+      columnNumber: 6
+      fillValue: e
+    - cellCoords: 26
+      spaceObject: {fileID: 45153628}
+      rowNumber: 2
+      columnNumber: 6
+      fillValue: e
+    - cellCoords: 36
+      spaceObject: {fileID: 333750660}
+      rowNumber: 3
+      columnNumber: 6
+      fillValue: e
+    - cellCoords: 46
+      spaceObject: {fileID: 1017552661}
+      rowNumber: 4
+      columnNumber: 6
+      fillValue: e
+    - cellCoords: 56
+      spaceObject: {fileID: 1136742707}
+      rowNumber: 5
+      columnNumber: 6
+      fillValue: e
   LToRDiagonals:
   - name: LToRDiagonal0
     cells:

@@ -38,9 +38,14 @@ public class SpaceScript : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collider)
     {
+        Debug.Log("landed");
+
         GameObject other = collider.gameObject;
 
-        spaceAboveMe.GetComponent<BoxCollider2D>().enabled = true;
+        if (!topRow)
+        {
+            spaceAboveMe.GetComponent<BoxCollider2D>().enabled = true;
+        }
 
         other.transform.SetParent(gameObject.transform);
         other.transform.localPosition = UnityEngine.Vector3.zero;
