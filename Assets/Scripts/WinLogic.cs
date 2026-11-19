@@ -247,10 +247,84 @@ public class WinLogic : MonoBehaviour
 
     void VerticalWinLogic(int column, string fill)
     {
-        VerticalCell[] colorInhabitingArray = GetMatchingCellsInColumn(column, fill);
-        if (colorInhabitingArray.Length == 2 && (colorInhabitingArray[1].rowNumber - colorInhabitingArray[0].rowNumber) == 1)
+        int rowsFilled = RowsFilledInColumn(column);
+        if (!(rowsFilled < 4))
         {
-            Debug.Log("Win");
+            VerticalCell[] colorInhabitingArray = GetMatchingCellsInColumn(column, fill);
+
+            //want to not make this for loop, this is just quick fix
+            int[] rowNumbersArray = new int[colorInhabitingArray.Length];
+
+            for (int i = colorInhabitingArray.Length - 1; i > -1; i--)
+            {
+                int l = colorInhabitingArray.Length - 1;
+                //5 4 3 2 1 0 i values/color array rows
+                //0 1 2 3 4 5 what I want
+                rowNumbersArray[l - i] = colorInhabitingArray[l - i].rowNumber;
+            }
+
+            Debug.Log(rowsFilled);
+            Debug.Log(string.Join(", ", rowNumbersArray));
+
+            if (!(rowNumbersArray.Length < 4))
+            {
+                if (rowNumbersArray.Contains(2) && rowNumbersArray.Contains(3))
+                {
+                    int twoIndex = Array.IndexOf(rowNumbersArray, 2);
+                    int threeIndex = Array.IndexOf(rowNumbersArray, 3);
+
+                    bool below = false;
+                    bool above = false;
+
+                    if (twoIndex == 2)
+                    {
+                        Debug.Log("Vert Win");
+                    }
+                    else if (twoIndex == 1)
+                    {
+                        below = true;
+                    }
+                    else
+                    {
+                        below = false;
+                    }
+
+                    if (below)
+                    {
+                        if (!((threeIndex + 1) >= rowNumbersArray.Length))
+                        {
+                            above = (rowNumbersArray[threeIndex + 1] == 4);
+                        }
+                        else
+                        {
+                            above = false;
+                        }
+
+                        if (above)
+                        {
+                            Debug.Log("Vert Win");
+                        }
+                    }
+                    else
+                    {
+                        bool doubleAbove = false;
+
+                        if (!((threeIndex + 1) >= rowNumbersArray.Length))
+                        {
+                            above = (rowNumbersArray[threeIndex + 1] == 4);
+                            if (!((threeIndex + 2) >= rowNumbersArray.Length))
+                            {
+                                doubleAbove = (rowNumbersArray[threeIndex + 2] == 5);
+                            }
+
+                            if (above && doubleAbove)
+                            {
+                                Debug.Log("Vert Win");
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -262,6 +336,15 @@ public class WinLogic : MonoBehaviour
         VerticalCell[] matchingCells = Array.FindAll(cellsInLine, cell => cell.fillValue == targetChipValue);
 
         return matchingCells;
+    }
+    public int RowsFilledInColumn(int columnIndex)
+    {
+        VerticalCell[] cellsInLine = columnsArray[columnIndex].cells;
+
+        // Creates a brand new array containing ONLY cells that match targetChipValue
+        VerticalCell[] matchingCells = Array.FindAll(cellsInLine, cell => cell.fillValue != "e");
+
+        return matchingCells.Length;
     }
 
     //void Diagonal4Guar()
