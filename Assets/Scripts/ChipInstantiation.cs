@@ -7,6 +7,7 @@ public class ChipInstantiation : MonoBehaviour
     public Vector3[] columnPositions;
     public bool readyToInstantiate;
     public bool redTurnCI;
+    public bool[] columnsFilled;
 
     public void InstantiatePickColor(int whichColumn)
     {
@@ -25,12 +26,18 @@ public class ChipInstantiation : MonoBehaviour
 
     public void InstantiateRed(int whichColumn)
     {
-        GameObject newChip = Instantiate(redChipPrefab, columnPositions[whichColumn], transform.rotation);
-        readyToInstantiate = false;
+        if (!columnsFilled[whichColumn])
+        {
+            GameObject newChip = Instantiate(redChipPrefab, columnPositions[whichColumn], transform.rotation);
+            readyToInstantiate = false;
+        }
     }
     public void InstantiateYellow(int whichColumn)
     {
-        GameObject newChip = Instantiate(yellowChipPrefab, columnPositions[whichColumn], transform.rotation);
-        readyToInstantiate = false;
+        if (!columnsFilled[whichColumn])
+        {
+            GameObject newChip = Instantiate(yellowChipPrefab, columnPositions[whichColumn], transform.rotation);
+            readyToInstantiate = false;
+        }
     }
 }

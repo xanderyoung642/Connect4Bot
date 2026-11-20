@@ -1993,7 +1993,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SpaceScript
   row: 4
   column: 2
-  inLRDiag: 0
+  inLRDiag: 1
   lRDiagIndex: 0
   inRLDiag: 1
   rLDiagIndex: 3
@@ -2318,6 +2318,7 @@ MonoBehaviour:
   - {x: 8.004375, y: 7.272875, z: 0}
   readyToInstantiate: 0
   redTurnCI: 0
+  columnsFilled: 00000000000000y
 --- !u!1 &493838027
 GameObject:
   m_ObjectHideFlags: 0

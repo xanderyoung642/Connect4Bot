@@ -1,4 +1,5 @@
 using System;
+using System.Drawing;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -101,47 +102,62 @@ public class WinLogic : MonoBehaviour
         chipInstantiationScript.readyToInstantiate = true;
     }
 
-    int GetIndexFromIntsLR(int diagonalIndex, int row, int column)
-    {
-        // Combines row first, then column (e.g., row = 0, column = 2 becomes "02")
-        string targetCoords = $"{row}{column}";
+    //int GetIndexFromIntsLR(int diagonalIndex, int row, int column)
+    //{
+    //    // Combines row first, then column (e.g., row = 0, column = 2 becomes "02")
+    //    string targetCoords = $"{row}{column}";
 
-        DiagonalCell[] cellsInLine = LToRDiagonals[diagonalIndex].cells;
+    //    DiagonalCell[] cellsInLine = LToRDiagonals[diagonalIndex].cells;
 
-        // Returns the second-level index where cellCoords matches, or -1 if not found
-        int foundIndex = Array.FindIndex(cellsInLine, cell => cell.cellCoords == targetCoords);
+    //    // Returns the second-level index where cellCoords matches, or -1 if not found
+    //    int foundIndex = Array.FindIndex(cellsInLine, cell => cell.cellCoords == targetCoords);
 
-        return foundIndex;
-    }
-    int GetIndexFromIntsRL(int diagonalIndex, int row, int column)
-    {
-        // Combines row first, then column (e.g., row = 0, column = 2 becomes "02")
-        string targetCoords = $"{row}{column}";
+    //    return foundIndex;
+    //}
+    //int GetIndexFromIntsRL(int diagonalIndex, int row, int column)
+    //{
+    //    // Combines row first, then column (e.g., row = 0, column = 2 becomes "02")
+    //    string targetCoords = $"{row}{column}";
 
-        DiagonalCell[] cellsInLine = RToLDiagonals[diagonalIndex].cells;
+    //    DiagonalCell[] cellsInLine = RToLDiagonals[diagonalIndex].cells;
 
-        // Returns the second-level index where cellCoords matches, or -1 if not found
-        int foundIndex = Array.FindIndex(cellsInLine, cell => cell.cellCoords == targetCoords);
+    //    // Returns the second-level index where cellCoords matches, or -1 if not found
+    //    int foundIndex = Array.FindIndex(cellsInLine, cell => cell.cellCoords == targetCoords);
 
-        return foundIndex;
-    }
+    //    return foundIndex; 
+    //}
 
     public void UpdateChip(int chipRow, int chipColumn, string fill, bool Lrd, int LrdI, bool Rld, int RldI)
     {
         rowsArray[chipRow].cells[chipColumn].fillValue = fill;
         columnsArray[chipColumn].cells[chipRow].fillValue = fill;
 
+        if (chipRow == 0)
+        {
+            chipInstantiationScript.columnsFilled[chipColumn] = true;
+        }
+
         int LrdCIndex = 0;
         int RldCIndex = 0;
+
+        //Debug.Log(Lrd);
+        //Debug.Log(Rld);
+        //Debug.Log(LrdI);
+        //Debug.Log(RldI);
+
         if (Lrd)
         {
-            LrdCIndex = GetIndexFromIntsLR(LrdI, chipRow, chipColumn);
-            LToRDiagonals[LrdI].cells[LrdCIndex].fillValue = fill;
+            //LrdCIndex = GetIndexFromIntsLR(LrdI, chipRow, chipColumn);
+            //Debug.Log(chipColumn - LToRDiagonals[LrdI].cells[0].columnNumber);
+            //Debug.Log(LToRDiagonals[LrdI].cells[0].columnNumber);
+            LToRDiagonals[LrdI].cells[chipColumn - LToRDiagonals[LrdI].cells[0].columnNumber].fillValue = fill;
         }
         if (Rld)
         {
-            RldCIndex = GetIndexFromIntsRL(RldI, chipRow, chipColumn);
-            RToLDiagonals[LrdI].cells[RldCIndex].fillValue = fill;
+            //RldCIndex = GetIndexFromIntsRL(RldI, chipRow, chipColumn);
+            //Debug.Log(chipColumn - RToLDiagonals[RldI].cells[0].columnNumber);
+            //Debug.Log(RToLDiagonals[RldI].cells[0].columnNumber);
+            RToLDiagonals[RldI].cells[chipColumn - RToLDiagonals[RldI].cells[0].columnNumber].fillValue = fill;
         }
 
         numberOfMoves++;
@@ -153,8 +169,41 @@ public class WinLogic : MonoBehaviour
         HorizontalWinLogic(chipRow, fill);
         VerticalWinLogic(chipColumn, fill);
 
-
-
+        if (Lrd)
+        {
+            if (LrdI == 0 || LrdI == 5)
+            {
+                Diagonal4Guar(Lrd, LrdI, false, 0, fill);
+            }
+            else if (LrdI == 1 || LrdI == 4)
+            {
+                Diagonal3Guar(Lrd, LrdI, false, 0, fill);
+            }
+            else if (LrdI == 2 || LrdI == 3)
+            {
+                Diagonal2Guar(Lrd, LrdI, false, 0, fill);
+            }
+        }
+        if (Rld)
+        {
+            if (RldI == 0 || RldI == 5)
+            {
+                Diagonal4Guar(false, 0, Rld, RldI, fill);
+            }
+            else if (RldI == 1 || RldI == 4)
+            {
+                Diagonal3Guar(false, 0, Rld, RldI, fill);
+            }
+            else if (RldI == 2 || RldI   == 3)
+            {
+                Diagonal2Guar(false, 0, Rld, RldI, fill);
+            }
+        }
+        
+        if (numberOfMoves == 42)
+        {
+            Debug.Log("How in the world did you draw in Connect 4?");
+        }
 
         Debug.Log("finished checking");
 
@@ -263,8 +312,8 @@ public class WinLogic : MonoBehaviour
                 rowNumbersArray[l - i] = colorInhabitingArray[l - i].rowNumber;
             }
 
-            Debug.Log(rowsFilled);
-            Debug.Log(string.Join(", ", rowNumbersArray));
+            //Debug.Log(rowsFilled);
+            //Debug.Log(string.Join(", ", rowNumbersArray));
 
             if (!(rowNumbersArray.Length < 4))
             {
@@ -337,6 +386,7 @@ public class WinLogic : MonoBehaviour
 
         return matchingCells;
     }
+
     public int RowsFilledInColumn(int columnIndex)
     {
         VerticalCell[] cellsInLine = columnsArray[columnIndex].cells;
@@ -347,9 +397,358 @@ public class WinLogic : MonoBehaviour
         return matchingCells.Length;
     }
 
-    //void Diagonal4Guar()
+    void Diagonal4Guar(bool Lr, int LrI, bool Rl, int RlI, string fill)
+    {
+        if (Lr)
+        {
+            DiagonalCell[] colorInhabitingArray = GetMatchingCellsInDiagonalLR(LrI, fill);
 
-    //void Diagonal3Guar()
+            Debug.Log(colorInhabitingArray.Length);
 
-    //void Diagonal2Guar()
+            //int[] columnNumbersArray = new int[colorInhabitingArray.Length];
+
+            //for (int i = 0; i < colorInhabitingArray.Length; i++)
+            //{
+            //    columnNumbersArray[i] = colorInhabitingArray[i].columnNumber;
+            //}
+
+            //Debug.Log(string.Join(", ", columnNumbersArray));
+
+            if  (colorInhabitingArray.Length == 4)
+            {
+                Debug.Log("LR 4 Guar Diagonal Win");
+            }
+        }
+        if (Rl)
+        {
+            DiagonalCell[] colorInhabitingArray = GetMatchingCellsInDiagonalRL(RlI, fill);
+
+            Debug.Log(colorInhabitingArray.Length);
+
+            //int[] columnNumbersArray = new int[colorInhabitingArray.Length];
+
+            //for (int i = 0; i < colorInhabitingArray.Length; i++)
+            //{
+            //    columnNumbersArray[i] = colorInhabitingArray[i].columnNumber;
+            //}
+
+            //Debug.Log(string.Join(", ", columnNumbersArray));
+
+            if (colorInhabitingArray.Length == 4)
+            {
+                Debug.Log("RL 4 Guar Diagonal Win");
+            }
+        }
+    }
+
+    void Diagonal3Guar(bool Lr, int LrI, bool Rl, int RlI, string fill)
+    {
+        if (Lr)
+        {
+            DiagonalCell[] colorInhabitingArray = GetMatchingCellsInDiagonalLR(LrI, fill);
+
+            //Debug.Log(colorInhabitingArray.Length);
+
+            int[] columnNumbersArray = new int[colorInhabitingArray.Length];
+
+            for (int i = 0; i < colorInhabitingArray.Length; i++)
+            {
+                columnNumbersArray[i] = colorInhabitingArray[i].columnNumber;
+            }
+
+            //Debug.Log(string.Join(", ", columnNumbersArray));
+
+            if (!(columnNumbersArray.Length < 4))
+            {
+                if (LrI == 1)
+                {
+                    if (columnNumbersArray.Contains(1) && columnNumbersArray.Contains(2) && columnNumbersArray.Contains(3))
+                    {
+                        Debug.Log("LR 3 Guar Diagonal Win");
+                    }
+                }
+                else if (LrI == 4)
+                {
+                    if (columnNumbersArray.Contains(3) && columnNumbersArray.Contains(4) && columnNumbersArray.Contains(5))
+                    {
+                        Debug.Log("LR 3 Guar Diagonal Win");
+                    }
+                }
+            }
+        }
+        if (Rl)
+        {
+            DiagonalCell[] colorInhabitingArray = GetMatchingCellsInDiagonalRL(RlI, fill);
+
+            //Debug.Log(colorInhabitingArray.Length);
+
+            int[] columnNumbersArray = new int[colorInhabitingArray.Length];
+
+            for (int i = 0; i < colorInhabitingArray.Length; i++)
+            {
+                columnNumbersArray[i] = colorInhabitingArray[i].columnNumber;
+            }
+
+            //Debug.Log(string.Join(", ", columnNumbersArray));
+
+            if (!(columnNumbersArray.Length < 4))
+            {
+                if (RlI == 1)
+                {
+                    if (columnNumbersArray.Contains(1) && columnNumbersArray.Contains(2) && columnNumbersArray.Contains(3))
+                    {
+                        Debug.Log("RL 3 Guar Diagonal Win");
+                    }
+                }
+                else if (RlI == 4)
+                {
+                    if (columnNumbersArray.Contains(3) && columnNumbersArray.Contains(4) && columnNumbersArray.Contains(5))
+                    {
+                        Debug.Log("RL 3 Guar Diagonal Win");
+                    }
+                }
+            }
+        }
+    }
+
+    void Diagonal2Guar(bool Lr, int LrI, bool Rl, int RlI, string fill)
+    {
+        if (Lr)
+        {
+            DiagonalCell[] colorInhabitingArray = GetMatchingCellsInDiagonalLR(LrI, fill);
+
+            //Debug.Log(colorInhabitingArray.Length);
+
+            int[] columnNumbersArray = new int[colorInhabitingArray.Length];
+
+            for (int i = 0; i < colorInhabitingArray.Length; i++)
+            {
+                columnNumbersArray[i] = colorInhabitingArray[i].columnNumber;
+            }
+
+            //Debug.Log(string.Join(", ", columnNumbersArray));
+
+            if (!(columnNumbersArray.Length < 4))
+            {
+                if (LrI == 2)
+                {
+                    int twoIndex = Array.IndexOf(columnNumbersArray, 2);
+                    int threeIndex = Array.IndexOf(columnNumbersArray, 3);
+
+                    bool leftSide = false;
+                    bool rightSide = false;
+
+                    if (twoIndex != 0)
+                    {
+                        leftSide = (columnNumbersArray[twoIndex - 1] == 1);
+                    }
+                    else
+                    {
+                        leftSide = false;
+                    }
+
+                    if (threeIndex != 5 && !((threeIndex + 1) >= columnNumbersArray.Length))
+                    {
+                        rightSide = (columnNumbersArray[threeIndex + 1] == 4);
+                    }
+                    else
+                    {
+                        rightSide = false;
+                    }
+
+                    if (leftSide && rightSide)
+                    {
+                        Debug.Log("LR 2 Guar Diagonal Win");
+                    }
+                    else if (leftSide)
+                    {
+                        if (twoIndex == 2)
+                        {
+                            Debug.Log("LR 2 Guar Diagonal Win");
+                        }
+                    }
+                    else if (rightSide)
+                    {
+                        if (columnNumbersArray.Contains(5))
+                        {
+                            Debug.Log("LR 2 Guar Diagonal Win");
+                        }
+                    }
+                }
+                else if (LrI == 3)
+                {
+                    int threeIndex = Array.IndexOf(columnNumbersArray, 3);
+                    int fourIndex = Array.IndexOf(columnNumbersArray, 4);
+
+                    bool leftSide = false;
+                    bool rightSide = false;
+
+                    if (threeIndex != 0)
+                    {
+                        leftSide = (columnNumbersArray[threeIndex - 1] == 2);
+                    }
+                    else
+                    {
+                        leftSide = false;
+                    }
+
+                    if (fourIndex != 5 && !((fourIndex + 1) >= columnNumbersArray.Length))
+                    {
+                        rightSide = (columnNumbersArray[fourIndex + 1] == 5);
+                    }
+                    else
+                    {
+                        rightSide = false;
+                    }
+
+                    if (leftSide && rightSide)
+                    {
+                        Debug.Log("LR 2 Guar Diagonal Win");
+                    }
+                    else if (leftSide)
+                    {
+                        if (threeIndex == 3)
+                        {
+                            Debug.Log("LR 2 Guar Diagonal Win");
+                        }
+                    }
+                    else if (rightSide)
+                    {
+                        if (columnNumbersArray.Contains(6))
+                        {
+                            Debug.Log("LR 2 Guar Diagonal Win");
+                        }
+                    }
+                }
+            }
+        }
+        if (Rl)
+        {
+            DiagonalCell[] colorInhabitingArray = GetMatchingCellsInDiagonalRL(RlI, fill);
+
+            //Debug.Log(colorInhabitingArray.Length);
+
+            int[] columnNumbersArray = new int[colorInhabitingArray.Length];
+
+            for (int i = 0; i < colorInhabitingArray.Length; i++)
+            {
+                columnNumbersArray[i] = colorInhabitingArray[i].columnNumber;
+            }
+
+            //Debug.Log(string.Join(", ", columnNumbersArray));
+
+            if (!(columnNumbersArray.Length < 4))
+            {
+                if (RlI == 2)
+                {
+                    int twoIndex = Array.IndexOf(columnNumbersArray, 2);
+                    int threeIndex = Array.IndexOf(columnNumbersArray, 3);
+
+                    bool leftSide = false;
+                    bool rightSide = false;
+
+                    if (twoIndex != 0)
+                    {
+                        leftSide = (columnNumbersArray[twoIndex - 1] == 1);
+                    }
+                    else
+                    {
+                        leftSide = false;
+                    }
+
+                    if (threeIndex != 5 && !((threeIndex + 1) >= columnNumbersArray.Length))
+                    {
+                        rightSide = (columnNumbersArray[threeIndex + 1] == 4);
+                    }
+                    else
+                    {
+                        rightSide = false;
+                    }
+
+                    if (leftSide && rightSide)
+                    {
+                        Debug.Log("RL 2 Guar Diagonal Win");
+                    }
+                    else if (leftSide)
+                    {
+                        if (twoIndex == 2)
+                        {
+                            Debug.Log("RL 2 Guar Diagonal Win");
+                        }
+                    }
+                    else if (rightSide)
+                    {
+                        if (columnNumbersArray.Contains(5))
+                        {
+                            Debug.Log("RL 2 Guar Diagonal Win");
+                        }
+                    }
+                }
+                else if (RlI == 3)
+                {
+                    int threeIndex = Array.IndexOf(columnNumbersArray, 3);
+                    int fourIndex = Array.IndexOf(columnNumbersArray, 4);
+
+                    bool leftSide = false;
+                    bool rightSide = false;
+
+                    if (threeIndex != 0)
+                    {
+                        leftSide = (columnNumbersArray[threeIndex - 1] == 2);
+                    }
+                    else
+                    {
+                        leftSide = false;
+                    }
+
+                    if (fourIndex != 5 && !((fourIndex + 1) >= columnNumbersArray.Length))
+                    {
+                        rightSide = (columnNumbersArray[fourIndex + 1] == 5);
+                    }
+                    else
+                    {
+                        rightSide = false;
+                    }
+
+                    if (leftSide && rightSide)
+                    {
+                        Debug.Log("RL 2 Guar Diagonal Win");
+                    }
+                    else if (leftSide)
+                    {
+                        if (threeIndex == 3)
+                        {
+                            Debug.Log("RL 2 Guar Diagonal Win");
+                        }
+                    }
+                    else if (rightSide)
+                    {
+                        if (columnNumbersArray.Contains(6))
+                        {
+                            Debug.Log("RL 2 Guar Diagonal Win");
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    public DiagonalCell[] GetMatchingCellsInDiagonalLR(int diagonalIndex, string targetChipValue)
+    {
+        DiagonalCell[] cellsInLine = LToRDiagonals[diagonalIndex].cells;
+
+        // Creates a brand new array containing ONLY cells that match targetChipValue
+        DiagonalCell[] matchingCells = Array.FindAll(cellsInLine, cell => cell.fillValue == targetChipValue);
+
+        return matchingCells;
+    }
+    public DiagonalCell[] GetMatchingCellsInDiagonalRL(int diagonalIndex, string targetChipValue)
+    {
+        DiagonalCell[] cellsInLine = RToLDiagonals[diagonalIndex].cells;
+
+        // Creates a brand new array containing ONLY cells that match targetChipValue
+        DiagonalCell[] matchingCells = Array.FindAll(cellsInLine, cell => cell.fillValue == targetChipValue);
+
+        return matchingCells;
+    }
 }
