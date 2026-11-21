@@ -1,5 +1,6 @@
 using System;
 using System.IO.Ports;
+using System.Security.Cryptography;
 using UnityEditor;
 using UnityEngine;
 
@@ -38,11 +39,24 @@ public class ArduinoConnector : MonoBehaviour
         }
     }
 
+    public void SendColumnToArduino(int column)
+    {
+        serial.Write(column.ToString());
+    }
+
     void OnApplicationQuit()
     {
         serial.Close();
         serial.Dispose();
     }
-
-    //serial.Write("");
+    void OnDisable()
+    {
+        serial.Close();
+        serial.Dispose();
+    }
+    void OnDestroy()
+    {
+        serial.Close();
+        serial.Dispose();
+    }
 }
