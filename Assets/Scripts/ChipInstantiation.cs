@@ -20,7 +20,7 @@ public class ChipInstantiation : MonoBehaviour
 
     void Start()
     {
-        arduinoConnectorScript = arduinoConnector.GetComponent<ArduinoConnector>();
+        //arduinoConnectorScript = arduinoConnector.GetComponent<ArduinoConnector>();
     }
 
     public void InstantiatePickColor(int whichColumn)

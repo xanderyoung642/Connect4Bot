@@ -7213,6 +7213,12 @@ MonoBehaviour:
       fillValue: e
   chipInstantiator: {fileID: 481614353}
   chipInstantiationScript: {fileID: 481614355}
+  gameModeWin: 0
+  rAI: 0
+  rAIObject: {fileID: 0}
+  rAIDiff: 0
+  yAIObject: {fileID: 0}
+  yAIDiff: 0
 --- !u!1 &899777806
 GameObject:
   m_ObjectHideFlags: 0
@@ -7229,7 +7235,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &899777807
 MonoBehaviour:
   m_ObjectHideFlags: 0

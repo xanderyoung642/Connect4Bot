@@ -93,6 +93,14 @@ public class WinLogic : MonoBehaviour
     public GameObject chipInstantiator;
     public ChipInstantiation chipInstantiationScript;
 
+    [Header("Game Mode and AI")]
+    public int gameModeWin;
+    public bool rAI;
+    public GameObject rAIObject;
+    public int rAIDiff;
+    public GameObject yAIObject;
+    public int yAIDiff;
+
     void Start()
     {
         redTurn = true;
