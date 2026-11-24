@@ -60,4 +60,16 @@ public class ChipInstantiation : MonoBehaviour
         arduinoConnectorScript.SendColumnToArduino(column + 1);
         InstantiatePickColor(column);
     }
+
+    public void ColumnSelectedUnityOrArduino(int column)
+    {
+        if (arduinoConnector.activeSelf)
+        {
+            ColumnSelectedToArduinoConnector(column);
+        }
+        else
+        {
+            InstantiatePickColor(column);
+        }
+    }
 }

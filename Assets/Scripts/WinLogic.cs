@@ -98,6 +98,7 @@ public class WinLogic : MonoBehaviour
     public bool rAI;
     public GameObject rAIObject;
     public int rAIDiff;
+    public bool yAI;
     public GameObject yAIObject;
     public int yAIDiff;
 
@@ -219,6 +220,26 @@ public class WinLogic : MonoBehaviour
 
         chipInstantiationScript.redTurnCI = redTurn;
         chipInstantiationScript.readyToInstantiate = true;
+
+        if (gameModeWin != 0)
+        {
+            if (redTurn && rAI)
+            {
+                if (rAIDiff == 0)
+                {
+                    rAIObject.GetComponent<BabyDifficulty>().BabyMakeMove();
+                }
+                //add rest once other ais are a thing
+            }
+            else if (!redTurn && yAI)
+            {
+                if (yAIDiff == 0)
+                {
+                    yAIObject.GetComponent<BabyDifficulty>().BabyMakeMove();
+                }
+                //add rest once other ais are a thing
+            }
+        }
     }
 
     void HorizontalWinLogic(int row, string fill)

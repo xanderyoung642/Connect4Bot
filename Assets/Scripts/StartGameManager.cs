@@ -5,7 +5,7 @@ public class StartGameManager : MonoBehaviour
 {
     [Header("Arduino Connector")]
     public GameObject arduinoConnector;
-    public GameObject arduinoButtonParent;
+    //public GameObject arduinoButtonParent;
     public bool arduinoConnectorOn;
     //make a ui checkbox that turns on and off the arduino connector
 
@@ -15,10 +15,12 @@ public class StartGameManager : MonoBehaviour
     public bool humanR;
 
     [Header("Red AI Difficulty")]
+    public bool rAI;
     public GameObject[] rAiDifficultyObjects;
     public int rAiDifficultySelected;
 
     [Header("Yellow AI Difficulty")]
+    public bool yAI;
     public GameObject[] yAiDifficultyObjects;
     public int yAiDifficultySelected;
     //0 = baby (random) 1 = easy (random but it blocks) 2 = medium (barely trained AI)
@@ -62,6 +64,9 @@ public class StartGameManager : MonoBehaviour
             yAiDifficultyObjects[i].SetActive(false);
         }
 
+        rAI = false;
+        yAI = false;
+
         gameMode = 0;
     }
 
@@ -104,25 +109,39 @@ public class StartGameManager : MonoBehaviour
     public void StartGame()
     {
         arduinoConnector.SetActive(arduinoConnectorOn);
-        arduinoButtonParent.SetActive(arduinoConnectorOn);
+        //arduinoButtonParent.SetActive(arduinoConnectorOn);
 
         if (gameMode == 1)
         {
             if (humanR)
             {
+                yAI = true;
                 yAiDifficultyObjects[yAiDifficultySelected].SetActive(true);
             }
             else
             {
+                rAI = true;
                 rAiDifficultyObjects[rAiDifficultySelected].SetActive(true);
             }
         }
         else if (gameMode == 2)
         {
+            rAI = true;
             rAiDifficultyObjects[rAiDifficultySelected].SetActive(true);
+
+            yAI = true;
             yAiDifficultyObjects[yAiDifficultySelected].SetActive(true);
         }
 
         startGameCanvas.SetActive(false);
+
+        if (rAI)
+        {
+            if (rAiDifficultySelected == 0)
+            {
+                rAiDifficultyObjects[rAiDifficultySelected].GetComponent<BabyDifficulty>().BabyMakeMove();
+            }
+            //add rest once other ais are a thing
+        }
     }
 }
